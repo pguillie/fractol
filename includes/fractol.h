@@ -6,7 +6,7 @@
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 14:24:55 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/12 12:33:47 by pguillie         ###   ########.fr       */
+/*   Updated: 2017/12/12 18:10:27 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,13 @@
 # include "mlx.h"
 # include "struct.h"
 
+# define KEYPRESS 2
+# define KEYPRESSMASK (1L << 0)
+
 void	*ft_memset(void *p, int c, size_t len);
 
-int		ft_mlx_init(t_mlx m, int ac, char **av);
-void	*ft_mandelbrot(t_mlx m);
+int		ft_mlx_init(t_mlx *m, int ac, char **av);
+int		ft_mouse_event(int key, int x, int y, t_mlx *m);
+void	ft_mandelbrot(t_img i);
 
 #endif

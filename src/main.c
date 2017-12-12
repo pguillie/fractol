@@ -6,28 +6,34 @@
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 12:40:06 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/12 14:23:33 by pguillie         ###   ########.fr       */
+/*   Updated: 2017/12/12 18:55:10 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		main(int ac, char *av[])
+#include <stdio.h>
+
+static int	ft_keyboard_event(int key, t_mlx m)
+{
+	(void)m;
+	
+	if (key == 53)
+		exit (EXIT_SUCCESS);
+	return (0);
+}
+
+int			main(int ac, char *av[])
 {
 	t_mlx	m;
 
-	if (ft_mlx_init(m, ac, av) < 0)
+	if (ft_mlx_init(&m, ac, av) < 0)
 		return (EXIT_FAILURE);
-	m.img = ft_mandelbrot(m);
-	mlx_put_image_to_window(m.mlx, m.win. m.img, 0, 0);
-	mlx_loop();
+	ft_mandelbrot(m.img);
+	//ft_julia(m.img);
+	mlx_put_image_to_window(m.mlx, m.win, m.img.ptr, 0, 0);
+	mlx_mouse_hook(m.win, ft_mouse_event, &m);
+	mlx_hook(m.win, KEYPRESS, KEYPRESSMASK, ft_keyboard_event, &m);
+	mlx_loop(m.mlx);
 	return (EXIT_SUCCESS);
 }	
-/*
-	mlx = mlx_init();
-	mndl = ft_mandelbrot(mlx, 1000, 1000);
-	win = mlx_new_window(mlx, 1000, 1000, "mandelbrot");
-	mlx_put_image_to_window(mlx, win, mndl, 0, 0);
-	mlx_loop(mlx);
-	return (0);
-}*/
