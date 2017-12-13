@@ -6,31 +6,32 @@
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 14:11:41 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/12 16:36:22 by pguillie         ###   ########.fr       */
+/*   Updated: 2017/12/13 15:16:47 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-typedef struct	s_img
+typedef struct	s_win
 {
 	void	*ptr;
-	char	*addr;
-	int		width;
-	int		height;
+	void	*img;
+	char	*str;
+	int		wdt;
+	int		hgt;
 	int		bpp;
-	int		lsize;
-	int		endian;
+	int		lsz;
+	int		edn;
 	double	zoom;
-	double	center[2];
-}				t_img;
+	double	ctr[2];
+	double	cur[3];
+}				t_win;
 
 typedef struct	s_mlx
 {
 	void	*mlx;
-	void	*win;
-	t_img	img;
+	t_win	win[2];
 }				t_mlx;
 
 #endif

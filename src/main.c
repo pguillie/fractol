@@ -6,22 +6,11 @@
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 12:40:06 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/12 18:55:10 by pguillie         ###   ########.fr       */
+/*   Updated: 2017/12/13 15:43:43 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-#include <stdio.h>
-
-static int	ft_keyboard_event(int key, t_mlx m)
-{
-	(void)m;
-	
-	if (key == 53)
-		exit (EXIT_SUCCESS);
-	return (0);
-}
 
 int			main(int ac, char *av[])
 {
@@ -29,11 +18,15 @@ int			main(int ac, char *av[])
 
 	if (ft_mlx_init(&m, ac, av) < 0)
 		return (EXIT_FAILURE);
-	ft_mandelbrot(m.img);
-	//ft_julia(m.img);
-	mlx_put_image_to_window(m.mlx, m.win, m.img.ptr, 0, 0);
-	mlx_mouse_hook(m.win, ft_mouse_event, &m);
-	mlx_hook(m.win, KEYPRESS, KEYPRESSMASK, ft_keyboard_event, &m);
+	ft_mandelbrot(m.win[M]);
+	ft_julia(m.win[J]);
+	mlx_put_image_to_window(m.mlx, m.win[M].ptr, m.win[M].img, 0, 0);
+	mlx_put_image_to_window(m.mlx, m.win[J].ptr, m.win[J].img, 0, 0);
+	mlx_mouse_hook(m.win[M].ptr, ft_mouse_m, &m);
+	mlx_hook(m.win[M].ptr, KEYPRESS, KEYPRESSMASK, ft_keyboard_m, &m);
+	mlx_mouse_hook(m.win[J].ptr, ft_mouse_j, &m);
+	mlx_hook(m.win[J].ptr, MOTIONNOTIFY, 0, ft_mouse_over, &m);
+	mlx_hook(m.win[J].ptr, KEYPRESS, KEYPRESSMASK, ft_keyboard_j, &m);
 	mlx_loop(m.mlx);
 	return (EXIT_SUCCESS);
 }	
