@@ -1,37 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct.h                                           :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/11 14:11:41 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/13 16:36:24 by pguillie         ###   ########.fr       */
+/*   Created: 2017/12/13 16:59:38 by pguillie          #+#    #+#             */
+/*   Updated: 2017/12/13 17:59:15 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_H
-# define STRUCT_H
+#include "fractol.h"
 
-typedef struct	s_win
+size_t	ft_strlen(const char *str)
 {
-	void	*ptr;
-	void	*img;
-	char	*str;
-	int		wdt;
-	int		hgt;
-	int		bpp;
-	int		lsz;
-	int		edn;
-	double	zoom;
-	double	ctr[2];
-	double	cur[3];
-}				t_win;
+	size_t	i;
 
-typedef struct	s_mlx
-{
-	void	*mlx;
-	t_win	win[2];
-}				t_mlx;
-
-#endif
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}

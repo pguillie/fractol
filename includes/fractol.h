@@ -6,7 +6,7 @@
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 14:24:55 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/13 15:08:07 by pguillie         ###   ########.fr       */
+/*   Updated: 2017/12/13 18:02:33 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # define MOTIONNOTIFY 6
 # define POINTERMASK (1L << 6)
 
+int		ft_arg(int ac, char **av, t_mlx *m);
+
 /*
 **	FRACTALES
 */
@@ -45,7 +47,7 @@ void	ft_julia(t_win w);
 **	MLX
 */
 
-int		ft_mlx_init(t_mlx *m, int ac, char **av);
+int		ft_mlx_init(t_mlx *m);
 
 int		ft_mouse_m(int key, int x, int y, t_mlx *m);
 int		ft_mouse_j(int key, int x, int y, t_mlx *m);
@@ -58,6 +60,8 @@ int		ft_keyboard_j(int key, t_mlx *m);
 **	LIBFT
 */
 
+int		ft_strcmp(const char *s1, const char *s2);
+size_t	ft_strlen(const char *str);
 void	*ft_memset(void *p, int c, size_t len);
 
 #endif

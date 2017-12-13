@@ -6,7 +6,7 @@
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 12:40:06 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/13 15:43:43 by pguillie         ###   ########.fr       */
+/*   Updated: 2017/12/13 18:01:43 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ int			main(int ac, char *av[])
 {
 	t_mlx	m;
 
-	if (ft_mlx_init(&m, ac, av) < 0)
+	if (ft_arg(ac, av, &m) < 0)
+		return (EXIT_FAILURE);
+	if (ft_mlx_init(&m) < 0)
 		return (EXIT_FAILURE);
 	ft_mandelbrot(m.win[M]);
 	ft_julia(m.win[J]);

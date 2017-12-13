@@ -1,37 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct.h                                           :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/11 14:11:41 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/13 16:36:24 by pguillie         ###   ########.fr       */
+/*   Created: 2017/12/13 16:43:09 by pguillie          #+#    #+#             */
+/*   Updated: 2017/12/13 17:59:00 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_H
-# define STRUCT_H
+#include "fractol.h"
 
-typedef struct	s_win
+int		ft_strcmp(const char *s1, const char *s2)
 {
-	void	*ptr;
-	void	*img;
-	char	*str;
-	int		wdt;
-	int		hgt;
-	int		bpp;
-	int		lsz;
-	int		edn;
-	double	zoom;
-	double	ctr[2];
-	double	cur[3];
-}				t_win;
+	size_t	i;
 
-typedef struct	s_mlx
-{
-	void	*mlx;
-	t_win	win[2];
-}				t_mlx;
-
-#endif
+	i = 0;
+	while (s1[i] == s2[i] && s1[i])
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
