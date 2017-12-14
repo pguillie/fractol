@@ -6,7 +6,7 @@
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 14:11:41 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/13 16:36:24 by pguillie         ###   ########.fr       */
+/*   Updated: 2017/12/14 15:00:52 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct	s_win
 typedef struct	s_mlx
 {
 	void	*mlx;
-	t_win	win[2];
+	t_win	win[3];
 }				t_mlx;
 
 #endif

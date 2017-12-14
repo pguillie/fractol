@@ -6,7 +6,7 @@
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 10:37:14 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/13 15:16:56 by pguillie         ###   ########.fr       */
+/*   Updated: 2017/12/14 16:58:14 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,24 @@ static int	ft_julia_seq(double c[2], double z[2], int max)
 	double	t;
 	int		i;
 
+	double a[2];
+
+	(void)t;
+	(void)a;
 	i = 0;
 	while (i < max && z[0] * z[0] + z[1] * z[1] < 4)
 	{
+		/* julia
 		t = z[0] * z[0] - z[1] * z[1] + c[0];
 		z[1] = 2 * z[0] * z[1] + c[1];
 		z[0] = t;
+		*/
+		///*
+		a[0] = (z[0] > 0 ? z[0] : -z[0]);
+		a[1] = (z[1] > 0 ? z[1] : -z[1]);
+		z[0] = a[0] * a[0] - a[1] * a[1] + c[0];
+		z[1] = 2 * a[0] *a[1] + c[1];
+		//*/
 		i++;
 	}
 	return (i);	

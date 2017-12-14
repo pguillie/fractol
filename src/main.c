@@ -6,7 +6,7 @@
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 12:40:06 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/13 18:01:43 by pguillie         ###   ########.fr       */
+/*   Updated: 2017/12/14 16:46:32 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,20 @@ int			main(int ac, char *av[])
 
 	if (ft_arg(ac, av, &m) < 0)
 		return (EXIT_FAILURE);
-	if (ft_mlx_init(&m) < 0)
+	if ((m.mlx = mlx_init()) == NULL)
 		return (EXIT_FAILURE);
+	if (ft_init_j(&m))
+		return (EXIT_FAILURE);
+	if (ft_init_m(&m))
+		return (EXIT_FAILURE);
+	mlx_loop(m.mlx);
+	return (EXIT_SUCCESS);
+}
+/*
+
+
+
+
 	ft_mandelbrot(m.win[M]);
 	ft_julia(m.win[J]);
 	mlx_put_image_to_window(m.mlx, m.win[M].ptr, m.win[M].img, 0, 0);
@@ -31,4 +43,4 @@ int			main(int ac, char *av[])
 	mlx_hook(m.win[J].ptr, KEYPRESS, KEYPRESSMASK, ft_keyboard_j, &m);
 	mlx_loop(m.mlx);
 	return (EXIT_SUCCESS);
-}	
+}*/	
