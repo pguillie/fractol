@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/15 10:07:45 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/15 15:11:42 by pguillie         ###   ########.fr       */
+/*   Created: 2017/12/15 16:00:09 by pguillie          #+#    #+#             */
+/*   Updated: 2017/12/15 16:02:23 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		main(int argc, char *argv[])
+char	*ft_strcpy(char *dst, const char *src)
 {
-	t_mlx	m;
+	size_t	i;
 
-	if (ft_init(argc, argv, &m))
-		return (EXIT_FAILURE);
-	if ((m.mlx = mlx_init()) == NULL || ft_win_set(&m))
-		return (EXIT_FAILURE);
-	mlx_loop(m.mlx);
-	return (EXIT_SUCCESS);
+	i = 0;
+	while (src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
 }

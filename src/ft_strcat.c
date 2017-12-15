@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/15 10:07:45 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/15 15:11:42 by pguillie         ###   ########.fr       */
+/*   Created: 2017/12/15 16:03:57 by pguillie          #+#    #+#             */
+/*   Updated: 2017/12/15 16:10:20 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		main(int argc, char *argv[])
+char	*ft_strcat(char *s1, char *s2)
 {
-	t_mlx	m;
+	size_t	i;
+	size_t	j;
 
-	if (ft_init(argc, argv, &m))
-		return (EXIT_FAILURE);
-	if ((m.mlx = mlx_init()) == NULL || ft_win_set(&m))
-		return (EXIT_FAILURE);
-	mlx_loop(m.mlx);
-	return (EXIT_SUCCESS);
+	i = 0;
+	while (s1[i])
+		i++;
+	j = 0;
+	while (s2[j])
+		s1[i++] = s2[j++];
+	s1[i] = '\0';
+	return (s1);
 }

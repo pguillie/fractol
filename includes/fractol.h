@@ -6,7 +6,7 @@
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 14:24:55 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/14 18:03:38 by pguillie         ###   ########.fr       */
+/*   Updated: 2017/12/15 17:19:36 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,14 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <math.h>
-
-# include "mlx.h"
-# include "struct.h"
+# include <time.h>
 
 # define SIZE_DFL 1000
 # define SIZE_MIN 100
-# define SIZE_X 2560
-# define SIZE_Y 1440
+# define SIZE_MAXX 2560
+# define SIZE_MAXY 1440
 
-# define J 0
-# define M 1
-# define A 2
+# define WIN_MAX 4;
 
 # define BUTTON1 1
 # define BUTTON2 2
@@ -58,34 +54,25 @@
 # define BUTTONRELEASE 5
 # define MOTIONNOTIFY 6
 
-int		ft_arg(int ac, char **av, t_mlx *m);
-int		ft_init_j(t_mlx *m);
-int		ft_init_m(t_mlx *m);
+# include "mlx.h"
+# include "struct.h"
 
-/*
-**	FRACTALES
-*/
+int		ft_init(int ac, char **av, t_mlx *m);
+int		ft_win_set(t_mlx *m);
 
-void	ft_mandelbrot(t_win w);
-void	ft_julia(t_win w);
-void	ft_mandelcube(t_win w);
+void	ft_fractal(t_win w);
+int		ft_sequence1(double *c, double *z, int i);
+int		ft_sequence2(double *c, double *z, int i);
+int		ft_sequence3(double *c, double *z, int i);
+void	ft_init1(double *c, double *z, int *p, t_win w);
+void	ft_init2(double *c, double *z, int *p, t_win w);
+void	ft_reset_m1(t_win *w);
+void	ft_reset_m2(t_win *w);
+void	ft_reset_j(t_win *w);
 
-/*
-**	MLX EVENTS
-*/
-
-int		ft_zoom(t_win *w, int key, int x, int y);
-int		ft_move(t_win *w, int key, int x, int y);
-int		ft_pointer(t_win *w, int key, int x, int y);
-
-int		ft_mouse_m(int key, int x, int y, t_mlx *m);
-int		ft_mouse_j(int key, int x, int y, t_mlx *m);
-
-int     ft_pointer_j(int x, int y, t_mlx *m);
-int     ft_pointer_m(int x, int y, t_mlx *m);
-
-int		ft_keyboard_m(int key, t_mlx *m);
-int		ft_keyboard_j(int key, t_mlx *m);
+int		ft_key_press(int key, t_win *w);
+int		ft_button_press(int button, int x, int y, t_win *w);
+int		ft_pointer_motion(int x, int y, t_win *w);
 
 /*
 **	LIBFT
@@ -94,5 +81,9 @@ int		ft_keyboard_j(int key, t_mlx *m);
 int		ft_strcmp(const char *s1, const char *s2);
 size_t	ft_strlen(const char *str);
 void	*ft_memset(void *p, int c, size_t len);
+char	*ft_strcat(char *s1, char *s2);
+char	*ft_strcpy(char *dst, const char *src);
+
+#include <stdio.h>
 
 #endif

@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_key_press.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/15 10:07:45 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/15 15:11:42 by pguillie         ###   ########.fr       */
+/*   Created: 2017/12/15 11:00:12 by pguillie          #+#    #+#             */
+/*   Updated: 2017/12/15 17:12:06 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		main(int argc, char *argv[])
+int		ft_key_press(int key, t_win *w)
 {
-	t_mlx	m;
+	printf("key: %d\n", key);
 
-	if (ft_init(argc, argv, &m))
-		return (EXIT_FAILURE);
-	if ((m.mlx = mlx_init()) == NULL || ft_win_set(&m))
-		return (EXIT_FAILURE);
-	mlx_loop(m.mlx);
-	return (EXIT_SUCCESS);
+	t_mlx	*m;
+
+	if (key == 53)//esc
+	{
+		m = (t_mlx*)w->mlx;
+		mlx_destroy_image(m->mlx, w->img);
+		mlx_destroy_window(m->mlx, w->ptr);
+		w->ptr = NULL;
+		if (m->win[0].ptr || m->win[1].ptr || m->win[2].ptr)
+			return (0);
+		exit(EXIT_SUCCESS);
+	}
+	if (key == 49) //space
+		w->set[1] = (w->set[1] + 1) % 2;
+	return (0);
 }

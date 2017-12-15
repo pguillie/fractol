@@ -5,61 +5,112 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/14 11:41:39 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/14 18:13:43 by pguillie         ###   ########.fr       */
+/*   Created: 2017/12/15 12:24:32 by pguillie          #+#    #+#             */
+/*   Updated: 2017/12/15 15:52:34 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		ft_init_j(t_mlx *m)
+static int	ft_usage(char *arg)
 {
-	if (m->win[J].wdt == 0)
-		return (0);
-	if ((m->win[J].ptr = mlx_new_window(m->mlx, m->win[J].wdt,
-					m->win[J].hgt, "Julia")) == NULL)
-		return (-1);
-	if ((m->win[J].img = mlx_new_image(m->mlx, m->win[J].wdt,
-					m->win[J].hgt)) == NULL)
-		return (-1);
-	m->win[J].str = mlx_get_data_addr(m->win[J].img, &(m->win[J].bpp),
-			&(m->win[J].lsz), &(m->win[J].edn));
-	m->win[J].zoom = 0.2;
-	m->win[J].ctr[0] = 0;
-	m->win[J].ctr[1] = 0;
-	m->win[J].cur[0] = -0.8;
-	m->win[J].cur[1] = 0.2;
-	m->win[J].cur[2] = 0;
-	ft_julia(m->win[J]);
-	mlx_put_image_to_window(m->mlx, m->win[J].ptr, m->win[J].img, 0, 0);
-	mlx_mouse_hook(m->win[J].ptr, ft_mouse_j, m);
-	mlx_hook(m->win[J].ptr, KEYPRESS, KEYPRESSMASK, ft_keyboard_j, m);
-	mlx_hook(m->win[J].ptr, MOTIONNOTIFY, 0, ft_pointer_j, m);
-	return (0);
+	if (arg)
+	{
+		write(2, "fractol: bad argument: ", 23);
+		write(2, arg, ft_strlen(arg));
+		write(2, "\n", 1);
+	}
+	write(2, "usage: fractol [widht [height]] ID ...\n", 39);
+	write(2, "\tID: J1 J2 J3 M1 M2 M3\n", 23);
+	return (-1);
 }
 
-int		ft_init_m(t_mlx *m)
+static int	ft_size(char **av, int i, int *s)
 {
-	if (m->win[M].wdt == 0)
-		return (0);
-	if ((m->win[M].ptr = mlx_new_window(m->mlx, m->win[M].wdt,
-					m->win[M].hgt, "Mandelbrot")) == NULL)
-		return (-1);
-	if ((m->win[M].img = mlx_new_image(m->mlx, m->win[M].wdt,
-					m->win[M].hgt)) == NULL)
-		return (-1);
-	m->win[M].str = mlx_get_data_addr(m->win[M].img, &(m->win[M].bpp),
-			&(m->win[M].lsz), &(m->win[M].edn));
-	m->win[M].zoom = 0.3;
-	m->win[M].ctr[0] = -0.65;
-	m->win[M].ctr[1] = 0;
-	m->win[M].cur[0] = 0;
-	m->win[M].cur[1] = 0;
-	m->win[M].cur[2] = 0;
-	ft_mandelbrot(m->win[M]);
-	mlx_put_image_to_window(m->mlx, m->win[M].ptr, m->win[M].img, 0, 0);
-	mlx_mouse_hook(m->win[M].ptr, ft_mouse_m, m);
-	mlx_hook(m->win[M].ptr, KEYPRESS, KEYPRESSMASK, ft_keyboard_m, m);
-	mlx_hook(m->win[M].ptr, MOTIONNOTIFY, 0, ft_pointer_m, m);
+	int		j;
+	int		n;
+
+	n = 0;
+	j = 0;
+	if (s[0] && s[1]) //deja initialise
+		return (-i);
+	while (av[i][j] >= '0' && av[i][j] <= '9')
+		n = n * 10 + av[i][j++] - '0';
+	if (av[i][j] || n == 0)
+		return (-i);
+	if (s[0] == 0)
+		s[0] = n;
+	else
+		s[1] = n;
+	return (i + 1);	
+}
+
+static void	ft_name_size(int *s, t_win *w)
+{
+	if (s[0] == 0)
+		s[0] = SIZE_DFL;
+	if (s[1] == 0)
+		s[1] = s[0];
+	if (s[0] < SIZE_MIN)
+		s[0] = SIZE_MIN;
+	if (s[0] > SIZE_MAXX)
+		s[0] = SIZE_MAXX;
+	if (s[1] < SIZE_MIN)
+		s[1] = SIZE_MIN;
+	if (s[1] > SIZE_MAXY)
+		s[1] = SIZE_MAXY;
+	w->wdt = s[0];
+	w->hgt = s[1];
+	ft_memset(s, 0, sizeof(int) * 2);
+}
+
+static int	ft_name(char **av, int i, int *s, t_win *w)
+{
+	if (ft_strlen(av[i]) != 2 && ft_strcmp(av[i], "mandelbrot")
+		&& ft_strcmp(av[i], "julia"))
+		return (-i);
+	if (av[i][0] == 'M' || av[i][0] == 'm')
+		w->init_seq = &ft_init1;
+	else if (av[i][0] == 'J' || av[i][0] == 'j')
+		w->init_seq = ft_init2;
+	else
+		return (-i);
+	if (av[i][1] == '1' || ft_strlen(av[i]) > 2)
+		w->sequence = ft_sequence1;
+	else if (av[i][1] == '2')
+		w->sequence = ft_sequence2;
+	else if (av[i][1] == '3')
+		w->sequence = ft_sequence3;
+	else
+		return (-i);
+	ft_name_size(s, w);
+	w->set[0] = 1;
+	return (i + 1);
+}
+
+int			ft_init(int ac, char **av, t_mlx *m)
+{
+	int		i;
+	int		w;
+	int		s[2];
+
+	w = 0;
+	i = 1;
+	ft_memset(s, 0, sizeof(int) * 2);
+	ft_memset(m, 0, sizeof(*m));
+	while (i < ac && w < 3)
+	{
+		if (av[i][0] >= '0' && av[i][0] <= '9')
+			i = ft_size(av, i, s);
+		else
+			i = ft_name(av, i, s, &m->win[w++]);
+		if (i < 0)
+			return (ft_usage(av[-i]));
+	}
+	if (w < 1 || i < ac)
+	{
+		write(2, "Please select between 1 and 3 fractals.\n", 40);
+		return (ft_usage(NULL));
+	}
 	return (0);
 }
