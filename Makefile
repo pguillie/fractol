@@ -34,14 +34,14 @@ EOC		= \033[0m
 all: $(NAME)
 
 $(NAME): obj $(LIB) $(OBJECTS)
-	$(CC) $(FLAGS) -o $@ $(OBJECTS) $(MLX)
+	$(CC) $(FLAGS) -o $@ -lX11 -lmlx -lXext $(OBJECTS) /usr/local/lib/libmlx.a #$(MLX)
 	@ echo "$(GREEN)[$@]: binary successfully created !$(EOC)"
 
 obj/%.o: src/%.c $(HEADERS) Makefile
 	$(eval FILE=$(shell echo $$(($(FILE) + 1))))
 	$(eval PERCENT=$(shell echo $$(($(FILE) * 100 / $(NB)))))
 	@ echo "[$(NAME)]: $(PERCENT)% ($(FILE)/$(NB))\r\c"
-	$(CC) $(FLAGS) -I $(INCPATH) -o $@ -c $<
+	$(CC) $(FLAGS) -I $(INCPATH) -I /usr/include/X11 -o $@ -c $<
 
 obj:
 	mkdir -p ./obj

@@ -1,1 +1,1 @@
-# fractol
+# fractolft_strncpy useless

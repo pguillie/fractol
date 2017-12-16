@@ -18,7 +18,7 @@ int		ft_key_press(int key, t_win *w)
 
 	t_mlx	*m;
 
-	if (key == 53)//esc
+	if (key == 53 || key == 65307)//esc
 	{
 		m = (t_mlx*)w->mlx;
 		mlx_destroy_image(m->mlx, w->img);

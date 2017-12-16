@@ -12,17 +12,17 @@
 
 #include "fractol.h"
 
-char	*ft_strcat(char *s1, char *s2)
+char	*ft_strcat(char *dest, const char *src)
 {
 	size_t	i;
 	size_t	j;
 
 	i = 0;
-	while (s1[i])
+	while (dest[i])
 		i++;
 	j = 0;
-	while (s2[j])
-		s1[i++] = s2[j++];
-	s1[i] = '\0';
-	return (s1);
+	while (src[j])
+		dest[i++] = src[j++];
+	dest[i] = '\0';
+	return (dest);
 }

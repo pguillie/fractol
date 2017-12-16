@@ -28,7 +28,8 @@ void		ft_fractal(t_win w)
 		{
 			w.init_seq(c, z, p, w);
 			i[1] = w.sequence(c, z, i[0]);
-			w.str[p[1] * w.lsz + p[0] * w.bpp / 8 + 1] = i[1] * 0xFF / i[0];
+			ft_color(w, p, i);
+			//w.str[p[1] * w.lsz + p[0] * w.bpp / 8 + 1] = i[1] * 0xFF / i[0];
 			p[1]++;
 		}
 		p[0]++;

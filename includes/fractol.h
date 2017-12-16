@@ -74,6 +74,8 @@ int		ft_key_press(int key, t_win *w);
 int		ft_button_press(int button, int x, int y, t_win *w);
 int		ft_pointer_motion(int x, int y, t_win *w);
 
+void	ft_color(t_win w, int *p, int *i);
+
 /*
 **	LIBFT
 */
@@ -81,8 +83,9 @@ int		ft_pointer_motion(int x, int y, t_win *w);
 int		ft_strcmp(const char *s1, const char *s2);
 size_t	ft_strlen(const char *str);
 void	*ft_memset(void *p, int c, size_t len);
-char	*ft_strcat(char *s1, char *s2);
-char	*ft_strcpy(char *dst, const char *src);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
+char	*ft_strcat(char *dest, const char *src);
+char	*ft_strcpy(char *dest, const char *src);
 
 #include <stdio.h>
 
