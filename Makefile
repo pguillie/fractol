@@ -6,7 +6,7 @@
 #    By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/12 11:31:17 by pguillie          #+#    #+#              #
-#    Updated: 2017/12/12 11:38:17 by pguillie         ###   ########.fr        #
+#    Updated: 2017/12/16 13:53:18 by pguillie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ EOC		= \033[0m
 all: $(NAME)
 
 $(NAME): obj $(LIB) $(OBJECTS)
-	$(CC) $(FLAGS) -o $@ -lX11 -lmlx -lXext $(OBJECTS) /usr/local/lib/libmlx.a #$(MLX)
+#	$(CC) $(FLAGS) -o $@ -lX11 -lmlx -lXext $(OBJECTS) /usr/local/lib/libmlx.a #linux
+	$(CC) $(FLAGS) -o $@ $(OBJECTS) $(MLX) #macOS
 	@ echo "$(GREEN)[$@]: binary successfully created !$(EOC)"
 
 obj/%.o: src/%.c $(HEADERS) Makefile

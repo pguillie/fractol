@@ -1,11 +1,49 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_color.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/12/16 13:56:15 by pguillie          #+#    #+#             */
+/*   Updated: 2017/12/16 17:02:13 by pguillie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
-
-
-void	ft_color(t_win w, int *p, int *i)
+static int	test(int i, int m, int c1, int c2)
 {
-  int	color;
+	unsigned char	a[3];
+	unsigned char	b[3];
 
-  color = ((i[1] * 0xFF / i[0]) << 16) + 0xFF - i[1] * 0xFF / i[0];
-  ft_memcpy(w.str + p[1] * w.lsz + p[0] * w.bpp / 8, (char*)&color, 4);
+	a[0] = (c1 << 8) >> 24;
+	a[1] = (c1 << 16) >> 24;
+	a[2] = (c1 << 24) >> 24;
+	b[0] = (c2 << 8) >> 24;
+	b[1] = (c2 << 16) >> 24;
+	b[2] = (c2 << 24) >> 24;
+	return (((i * a[0] / m) << 16)
+			+ ((i * a[1] / m) << 8)
+			+ (i * a[2] / m)
+			+ ((b[0] - i * b[0] / m) << 16)
+			+ ((b[1] - i * b[1] / m) << 8)
+			+ (b[2] - i * b[2] / m));
+}
+
+void		ft_color(t_win w, int *p, int *i)
+{
+	int	color;
+	/* faire par palier fixes - pas par proportionnalite */
+	if (i[0] == i[1])
+		color = 0;
+	else if (i[0] > i[1] / 2)
+		color = test(i[0] - i[1] / 2, i[1] / 2, w.col[0], w.col[1]);
+	else if (i[0] > i[1] / 4)
+		color = test(i[0] - i[1] / 4, i[1] / 4, w.col[1], w.col[2]);
+	else if (i[0] > i[1] / 8)
+		color = test(i[0], i[1] / 8, w.col[2], w.col[3]);
+	else
+		color = test(i[0], i[1] / 8, w.col[3], w.col[4]);
+	ft_memcpy(w.str + p[1] * w.lsz + p[0] * w.bpp / 8, (char*)&color, 4);
 }

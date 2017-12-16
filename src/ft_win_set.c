@@ -6,7 +6,7 @@
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 13:14:55 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/15 17:19:09 by pguillie         ###   ########.fr       */
+/*   Updated: 2017/12/16 16:55:24 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,15 @@ static char	*ft_win_set_j(t_win *w)
 	return (NULL);
 }
 
+static void	ft_win_set_color(t_win *w)
+{
+	w->col[0] = (0xFF << 16) + (0xFF << 8) + 0xFF;
+	w->col[1] = 0xFF;
+	w->col[2] = 0xFF << 16;
+	w->col[3] = (0xFF << 16) + (0xBF << 8);
+	w->col[4] = 0;
+}
+
 int			ft_win_set(t_mlx *m)
 {
 	char	*name;
@@ -80,6 +89,7 @@ int			ft_win_set(t_mlx *m)
 		mlx_hook(m->win[i].ptr, MOTIONNOTIFY, POINTERMOTIONMASK,
 				 ft_pointer_motion, &m->win[i]);
 		m->win[i].reset(&m->win[i]);
+		ft_win_set_color(&m->win[i]);
 		ft_fractal(m->win[i]);
 		mlx_put_image_to_window(m->mlx, m->win[i].ptr, m->win[i].img, 0, 0);
 		i++;

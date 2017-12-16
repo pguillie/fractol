@@ -6,7 +6,7 @@
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 14:11:41 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/15 16:32:09 by pguillie         ###   ########.fr       */
+/*   Updated: 2017/12/16 16:44:14 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct	s_win
 	double	ctr[2];
 	double	cur[2];
 	int		set[2];
+	int		col[5];
 	void	(*init_seq)(double *c, double *z, int *p, struct s_win w);
 	int		(*sequence)(double *c, double *z, int i);
 	void	(*reset)(struct s_win *w);

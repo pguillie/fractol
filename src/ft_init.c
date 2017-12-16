@@ -6,7 +6,7 @@
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 12:24:32 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/15 15:52:34 by pguillie         ###   ########.fr       */
+/*   Updated: 2017/12/16 16:55:33 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	ft_size(char **av, int i, int *s)
 
 	n = 0;
 	j = 0;
-	if (s[0] && s[1]) //deja initialise
+	if (s[0] && s[1])
 		return (-i);
 	while (av[i][j] >= '0' && av[i][j] <= '9')
 		n = n * 10 + av[i][j++] - '0';
