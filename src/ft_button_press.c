@@ -14,7 +14,10 @@
 
 int		ft_button_press(int button, int x, int y, t_win *w)
 {
-	if (button == BUTTON5)
+  printf("button: %d\n", button);
+  t_mlx	*m;
+  
+	if (button == BUTTON4)
 	{
 		w->ctr[0] = (w->ctr[0] + x / (w->wdt * w->zoom)
 					 - 0.5 / w->zoom + w->ctr[0]) / 2;
@@ -22,7 +25,7 @@ int		ft_button_press(int button, int x, int y, t_win *w)
 					 - 0.5 / w->zoom + w->ctr[1]) / 2;
 		w->zoom *= 2;
 	}
-	else if (button == BUTTON4 && w->zoom > 0.001)
+	else if (button == BUTTON5 && w->zoom > 0.001)
 	{
 		w->ctr[0] = 2 * w->ctr[0] - x / (w->wdt * w->zoom)
 			+ 0.5 / w->zoom - w->ctr[0];
@@ -37,7 +40,12 @@ int		ft_button_press(int button, int x, int y, t_win *w)
 	}
 	else
 		return (1);
+	write(1, "toto\n", 5);
 	ft_fractal(*w);
-	mlx_put_image_to_window(w->mlx, w->ptr, w->img, 0, 0);
+	write(1, "tata\n", 5);
+	printf("mlx: %p -- win: %p -- img: %p", w->mlx, w->ptr, w->img);
+	m = (t_mlx*)(w->mlx);
+	mlx_put_image_to_window(m->mlx, w->ptr, w->img, 0, 0);
+	write(1, "tutu\n", 5);
 	return (0);
 }

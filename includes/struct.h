@@ -27,12 +27,20 @@ typedef struct	s_win
 	double	zoom;
 	double	ctr[2];
 	double	cur[2];
-	int		set[2];
+  int		i;
+  int		set[2];
 	int		col[5];
 	void	(*init_seq)(double *c, double *z, int *p, struct s_win w);
 	int		(*sequence)(double *c, double *z, int i);
 	void	(*reset)(struct s_win *w);
 }				t_win;
+
+typedef struct	s_thread
+{
+  t_win	w;
+  int	beg;
+  int	end;
+}		t_thread;
 
 typedef struct	s_mlx
 {

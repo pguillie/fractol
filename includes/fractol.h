@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <pthread.h>
 # include <math.h>
 # include <time.h>
 
@@ -23,18 +24,9 @@
 # define SIZE_MAXX 2560
 # define SIZE_MAXY 1440
 
+# define THREAD_NB 4
+
 # define WIN_MAX 4;
-
-# define BUTTON1 1
-# define BUTTON2 2
-# define BUTTON3 3
-# define BUTTON4 4
-# define BUTTON5 5
-
-# define KEY_UP 126
-# define KEY_DO 125
-# define KEY_RI 124
-# define KEY_LE 123
 
 # define KEYPRESSMASK (1L<<0)
 # define KEYRELEASEMASK (1L<<1)
@@ -56,6 +48,7 @@
 
 # include "mlx.h"
 # include "struct.h"
+# include "define.h"
 
 int		ft_init(int ac, char **av, t_mlx *m);
 int		ft_win_set(t_mlx *m);

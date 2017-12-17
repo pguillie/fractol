@@ -73,6 +73,7 @@ int			ft_win_set(t_mlx *m)
 	i = 0;
 	while (i < 3 && m->win[i].set[0])
 	{
+		printf("i: %d\n", i);
 		m->win[i].mlx = m;
 		if (m->win[i].init_seq == ft_init1)
 			name = ft_win_set_m(&m->win[i]);
@@ -83,6 +84,7 @@ int			ft_win_set(t_mlx *m)
 		m->win[i].img = mlx_new_image(m->mlx, m->win[i].wdt, m->win[i].hgt);
 		m->win[i].str = mlx_get_data_addr(m->win[i].img, &m->win[i].bpp,
 										  &m->win[i].lsz, &m->win[i].edn);
+		m->win[i].i = 50;
 		mlx_hook(m->win[i].ptr, KEYPRESS, KEYPRESSMASK, ft_key_press, &m->win[i]);
 		mlx_hook(m->win[i].ptr, BUTTONPRESS, BUTTONPRESSMASK,
 				 ft_button_press, &m->win[i]);

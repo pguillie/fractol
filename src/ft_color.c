@@ -37,13 +37,22 @@ void		ft_color(t_win w, int *p, int *i)
 	/* faire par palier fixes - pas par proportionnalite */
 	if (i[0] == i[1])
 		color = 0;
-	else if (i[0] > i[1] / 2)
-		color = test(i[0] - i[1] / 2, i[1] / 2, w.col[0], w.col[1]);
-	else if (i[0] > i[1] / 4)
-		color = test(i[0] - i[1] / 4, i[1] / 4, w.col[1], w.col[2]);
-	else if (i[0] > i[1] / 8)
-		color = test(i[0], i[1] / 8, w.col[2], w.col[3]);
+	else if (i[0] % 100 > 50)
+	  color = test(i[0] % 100, 50, w.col[0], w.col[1]);
+	else if (i[0] % 100 > 25)
+	  color = test(i[0] % 100, 25, w.col[1], w.col[2]);
+	else if (i[0] % 100 > 12)
+	  color = test(i[0] % 100, 12, w.col[2], w.col[3]);
 	else
-		color = test(i[0], i[1] / 8, w.col[3], w.col[4]);
+	  color = test(i[0] % 100, 12, w.col[3], w.col[0]);
+	      
+	/* else if (i[0] > i[1] / 2) */
+	/* 	color = test(i[0] - i[1] / 2, i[1] / 2, w.col[0], w.col[1]); */
+	/* else if (i[0] > i[1] / 4) */
+	/* 	color = test(i[0] - i[1] / 4, i[1] / 4, w.col[1], w.col[2]); */
+	/* else if (i[0] > i[1] / 8) */
+	/* 	color = test(i[0], i[1] / 8, w.col[2], w.col[3]); */
+	/* else */
+	/* 	color = test(i[0], i[1] / 8, w.col[3], w.col[4]); */
 	ft_memcpy(w.str + p[1] * w.lsz + p[0] * w.bpp / 8, (char*)&color, 4);
 }

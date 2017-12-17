@@ -16,6 +16,7 @@ FLAGS	= -Wall -Werror -Wextra
 INCPATH	= includes/
 HEADERS	= $(addprefix $(INCPATH), fractol.h)
 MLX		= -lm -L/usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
+THREAD	= -lpthread
 
 SOURCES	:= $(shell find src | grep "\.c" | grep -v "\.c.")
 NB		:= $(shell find src | grep "\.c" | grep -v "\.c." | wc -l\
@@ -34,8 +35,8 @@ EOC		= \033[0m
 all: $(NAME)
 
 $(NAME): obj $(LIB) $(OBJECTS)
-#	$(CC) $(FLAGS) -o $@ -lX11 -lmlx -lXext $(OBJECTS) /usr/local/lib/libmlx.a #linux
-	$(CC) $(FLAGS) -o $@ $(OBJECTS) $(MLX) #macOS
+	$(CC) $(FLAGS) -o $@ $(THREAD) $(THREAD) -lX11 -lmlx -lXext $(OBJECTS) /usr/local/lib/libmlx.a #linux
+#	$(CC) $(FLAGS) -o $@ $(OBJECTS) $(THREAD) $(MLX) #macOS
 	@ echo "$(GREEN)[$@]: binary successfully created !$(EOC)"
 
 obj/%.o: src/%.c $(HEADERS) Makefile

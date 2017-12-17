@@ -18,9 +18,9 @@ int		ft_key_press(int key, t_win *w)
 
 	t_mlx	*m;
 
-	if (key == 53 || key == 65307)//esc
+	m = (t_mlx*)(w->mlx);
+	if (key == KEY_ESC)
 	{
-		m = (t_mlx*)w->mlx;
 		mlx_destroy_image(m->mlx, w->img);
 		mlx_destroy_window(m->mlx, w->ptr);
 		w->ptr = NULL;
@@ -28,7 +28,18 @@ int		ft_key_press(int key, t_win *w)
 			return (0);
 		exit(EXIT_SUCCESS);
 	}
-	if (key == 49) //space
-		w->set[1] = (w->set[1] + 1) % 2;
+	if (key == KEY_SPC)
+	  {
+	    w->set[1] = (w->set[1] + 1) % 2;
+	    return (0);
+	  }
+	if (key == KEY_RAZ)
+	  w->reset(w);
+	else if (key == KEY_PLUS)
+	  w->i += 10;
+	else if (key == KEY_MINUS && w->i > 10)
+	  w->i -= 10;
+	ft_fractal(*w);
+	mlx_put_image_to_window(m->mlx, w->ptr, w->img, 0, 0);
 	return (0);
 }
