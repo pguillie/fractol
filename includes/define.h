@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   define.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/12/18 09:43:57 by pguillie          #+#    #+#             */
+/*   Updated: 2017/12/18 11:21:21 by pguillie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #ifndef DEFINE_H
 # define DEFINE_H
 
@@ -18,7 +29,7 @@
 #  define KEY_MINUS 65453
 # endif
 
-# ifdef __macos
+# ifdef __APPLE__
 #  define BUTTON1 1
 #  define BUTTON2 2
 #  define BUTTON3 3
@@ -26,10 +37,13 @@
 #  define BUTTON5 4
 #  define KEY_SPC 49
 #  define KEY_ESC 53
+#  define KEY_RAZ 82
 #  define KEY_UP 126
 #  define KEY_DO 125
 #  define KEY_RI 124
 #  define KEY_LE 123
+#  define KEY_PLUS 69
+#  define KEY_MINUS 78
 # endif
 
 #endif

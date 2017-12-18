@@ -6,7 +6,7 @@
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 14:11:41 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/16 16:44:14 by pguillie         ###   ########.fr       */
+/*   Updated: 2017/12/18 19:34:26 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,16 @@ typedef struct	s_win
 	char	*str;
 	int		wdt;
 	int		hgt;
+	int		min;
 	int		bpp;
 	int		lsz;
 	int		edn;
 	double	zoom;
 	double	ctr[2];
+	double	mv[2];
 	double	cur[2];
-  int		i;
-  int		set[2];
+	int		i;
+	int		set[2];
 	int		col[5];
 	void	(*init_seq)(double *c, double *z, int *p, struct s_win w);
 	int		(*sequence)(double *c, double *z, int i);
@@ -37,9 +39,10 @@ typedef struct	s_win
 
 typedef struct	s_thread
 {
-  t_win	w;
-  int	beg;
-  int	end;
+	pthread_t	id;
+	t_win		w;
+	int			beg;
+	int			end;
 }		t_thread;
 
 typedef struct	s_mlx

@@ -6,7 +6,7 @@
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 12:24:32 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/16 16:55:33 by pguillie         ###   ########.fr       */
+/*   Updated: 2017/12/18 20:23:38 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	ft_usage(char *arg)
 		write(2, "\n", 1);
 	}
 	write(2, "usage: fractol [widht [height]] ID ...\n", 39);
-	write(2, "\tID: J1 J2 J3 M1 M2 M3\n", 23);
+	write(2, "\tID: julia mandelbrot J1 J2 J3 J4 M1 M2 M3 M4\n", 46);
 	return (-1);
 }
 
@@ -61,6 +61,7 @@ static void	ft_name_size(int *s, t_win *w)
 		s[1] = SIZE_MAXY;
 	w->wdt = s[0];
 	w->hgt = s[1];
+	w->min = (w->wdt < w->hgt ? w->wdt : w->hgt);
 	ft_memset(s, 0, sizeof(int) * 2);
 }
 
@@ -81,6 +82,8 @@ static int	ft_name(char **av, int i, int *s, t_win *w)
 		w->sequence = ft_sequence2;
 	else if (av[i][1] == '3')
 		w->sequence = ft_sequence3;
+	else if (av[i][1] == '4')
+		w->sequence = ft_sequence4;
 	else
 		return (-i);
 	ft_name_size(s, w);

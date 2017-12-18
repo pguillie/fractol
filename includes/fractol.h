@@ -6,7 +6,7 @@
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 14:24:55 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/15 17:19:36 by pguillie         ###   ########.fr       */
+/*   Updated: 2017/12/18 21:01:16 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@
 # define SIZE_MAXX 2560
 # define SIZE_MAXY 1440
 
-# define THREAD_NB 4
+# define THREAD_NB 16
 
-# define WIN_MAX 4;
+# define WIN_MAX 4
 
 # define KEYPRESSMASK (1L<<0)
 # define KEYRELEASEMASK (1L<<1)
@@ -57,13 +57,17 @@ void	ft_fractal(t_win w);
 int		ft_sequence1(double *c, double *z, int i);
 int		ft_sequence2(double *c, double *z, int i);
 int		ft_sequence3(double *c, double *z, int i);
+int		ft_sequence4(double *c, double *z, int i);
 void	ft_init1(double *c, double *z, int *p, t_win w);
 void	ft_init2(double *c, double *z, int *p, t_win w);
 void	ft_reset_m1(t_win *w);
 void	ft_reset_m2(t_win *w);
+void	ft_reset_m3(t_win *w);
+void	ft_reset_m4(t_win *w);
 void	ft_reset_j(t_win *w);
 
 int		ft_key_press(int key, t_win *w);
+int		ft_key_release(int key, t_win *w);
 int		ft_button_press(int button, int x, int y, t_win *w);
 int		ft_pointer_motion(int x, int y, t_win *w);
 

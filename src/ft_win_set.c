@@ -6,7 +6,7 @@
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 13:14:55 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/16 16:55:24 by pguillie         ###   ########.fr       */
+/*   Updated: 2017/12/18 18:20:50 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,18 @@ static char	*ft_win_set_m(t_win *w)
 	}
 	if (w->sequence == ft_sequence2)
 	{
-		w->reset = ft_reset_m1;
+		w->reset = ft_reset_m2;
 		return ("Mandelbrot(2)");
 	}
 	if (w->sequence == ft_sequence3)
 	{
-		w->reset = ft_reset_m2;
+		w->reset = ft_reset_m3;
 		return ("Mandelbrot(3)");
+	}
+	if (w->sequence == ft_sequence4)
+	{
+		w->reset = ft_reset_m4;
+		return ("Mandelbrot(4)");
 	}
 	return (NULL);
 }
@@ -53,6 +58,12 @@ static char	*ft_win_set_j(t_win *w)
 		w->cur[1] = 0.21;
 		return ("Julia(3)");
 	}
+	if (w->sequence == ft_sequence4)
+	{
+		w->cur[0] = 0.1;
+		w->cur[1] = 0.2;
+		return ("Julia(4)");
+	}
 	return (NULL);
 }
 
@@ -73,7 +84,6 @@ int			ft_win_set(t_mlx *m)
 	i = 0;
 	while (i < 3 && m->win[i].set[0])
 	{
-		printf("i: %d\n", i);
 		m->win[i].mlx = m;
 		if (m->win[i].init_seq == ft_init1)
 			name = ft_win_set_m(&m->win[i]);
@@ -84,8 +94,9 @@ int			ft_win_set(t_mlx *m)
 		m->win[i].img = mlx_new_image(m->mlx, m->win[i].wdt, m->win[i].hgt);
 		m->win[i].str = mlx_get_data_addr(m->win[i].img, &m->win[i].bpp,
 										  &m->win[i].lsz, &m->win[i].edn);
-		m->win[i].i = 50;
+		m->win[i].i = 100;
 		mlx_hook(m->win[i].ptr, KEYPRESS, KEYPRESSMASK, ft_key_press, &m->win[i]);
+		mlx_hook(m->win[i].ptr, KEYRELEASE, KEYRELEASEMASK, ft_key_release, &m->win[i]);
 		mlx_hook(m->win[i].ptr, BUTTONPRESS, BUTTONPRESSMASK,
 				 ft_button_press, &m->win[i]);
 		mlx_hook(m->win[i].ptr, MOTIONNOTIFY, POINTERMOTIONMASK,
