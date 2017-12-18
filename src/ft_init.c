@@ -6,7 +6,7 @@
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 12:24:32 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/18 20:23:38 by pguillie         ###   ########.fr       */
+/*   Updated: 2017/12/18 21:34:17 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	ft_size(char **av, int i, int *s)
 		s[0] = n;
 	else
 		s[1] = n;
-	return (i + 1);	
+	return (i + 1);
 }
 
 static void	ft_name_size(int *s, t_win *w)
@@ -68,7 +68,7 @@ static void	ft_name_size(int *s, t_win *w)
 static int	ft_name(char **av, int i, int *s, t_win *w)
 {
 	if (ft_strlen(av[i]) != 2 && ft_strcmp(av[i], "mandelbrot")
-		&& ft_strcmp(av[i], "julia"))
+			&& ft_strcmp(av[i], "julia"))
 		return (-i);
 	if (av[i][0] == 'M' || av[i][0] == 'm')
 		w->init_seq = &ft_init1;

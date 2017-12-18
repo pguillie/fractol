@@ -6,7 +6,7 @@
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 13:14:55 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/18 18:20:50 by pguillie         ###   ########.fr       */
+/*   Updated: 2017/12/18 22:12:25 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,40 +40,35 @@ static char	*ft_win_set_m(t_win *w)
 static char	*ft_win_set_j(t_win *w)
 {
 	w->reset = ft_reset_j;
+	w->cur[0] = 0.5;
+	w->cur[1] = 0.5;
 	if (w->sequence == ft_sequence1)
-	{
-		w->cur[0] = 0.8;
-		w->cur[1] = 0.02;
 		return ("Julia");
-	}
 	if (w->sequence == ft_sequence2)
-	{
-		w->cur[0] = 0.2;
-		w->cur[1] = 0.5;
 		return ("Julia(2)");
-	}
 	if (w->sequence == ft_sequence3)
-	{
-		w->cur[0] = 0.01;
-		w->cur[1] = 0.21;
 		return ("Julia(3)");
-	}
 	if (w->sequence == ft_sequence4)
-	{
-		w->cur[0] = 0.1;
-		w->cur[1] = 0.2;
 		return ("Julia(4)");
-	}
 	return (NULL);
 }
 
-static void	ft_win_set_color(t_win *w)
+static int	ft_win_set_mlx(t_mlx *m, t_win *w, char *name)
 {
-	w->col[0] = (0xFF << 16) + (0xFF << 8) + 0xFF;
-	w->col[1] = 0xFF;
-	w->col[2] = 0xFF << 16;
-	w->col[3] = (0xFF << 16) + (0xBF << 8);
-	w->col[4] = 0;
+	if (!(w->ptr = mlx_new_window(m->mlx, w->wdt, w->hgt, name)))
+		return (-1);
+	if (!(w->img = mlx_new_image(m->mlx, w->wdt, w->hgt)))
+		return (-1);
+	w->str = mlx_get_data_addr(w->img, &w->bpp, &w->lsz, &w->edn);
+	return (0);
+}
+
+static void	ft_win_set_hook(t_win *w)
+{
+	mlx_hook(w->ptr, KEYPRESS, KEYPRESSMASK, ft_key_press, w);
+	mlx_hook(w->ptr, KEYRELEASE, KEYRELEASEMASK, ft_key_release, w);
+	mlx_hook(w->ptr, BUTTONPRESS, BUTTONPRESSMASK, ft_button_press, w);
+	mlx_hook(w->ptr, MOTIONNOTIFY, POINTERMOTIONMASK, ft_pointer_motion, w);
 }
 
 int			ft_win_set(t_mlx *m)
@@ -89,20 +84,12 @@ int			ft_win_set(t_mlx *m)
 			name = ft_win_set_m(&m->win[i]);
 		else
 			name = ft_win_set_j(&m->win[i]);
-		m->win[i].ptr = mlx_new_window(m->mlx, m->win[i].wdt,
-									   m->win[i].hgt, name);
-		m->win[i].img = mlx_new_image(m->mlx, m->win[i].wdt, m->win[i].hgt);
-		m->win[i].str = mlx_get_data_addr(m->win[i].img, &m->win[i].bpp,
-										  &m->win[i].lsz, &m->win[i].edn);
+		if (ft_win_set_mlx(m, &m->win[i], name))
+			return (-1);
+		ft_win_set_hook(&m->win[i]);
 		m->win[i].i = 100;
-		mlx_hook(m->win[i].ptr, KEYPRESS, KEYPRESSMASK, ft_key_press, &m->win[i]);
-		mlx_hook(m->win[i].ptr, KEYRELEASE, KEYRELEASEMASK, ft_key_release, &m->win[i]);
-		mlx_hook(m->win[i].ptr, BUTTONPRESS, BUTTONPRESSMASK,
-				 ft_button_press, &m->win[i]);
-		mlx_hook(m->win[i].ptr, MOTIONNOTIFY, POINTERMOTIONMASK,
-				 ft_pointer_motion, &m->win[i]);
 		m->win[i].reset(&m->win[i]);
-		ft_win_set_color(&m->win[i]);
+		ft_color_set(&m->win[i]);
 		ft_fractal(m->win[i]);
 		mlx_put_image_to_window(m->mlx, m->win[i].ptr, m->win[i].img, 0, 0);
 		i++;

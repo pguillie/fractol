@@ -6,13 +6,13 @@
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 13:56:15 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/18 12:07:53 by pguillie         ###   ########.fr       */
+/*   Updated: 2017/12/18 22:15:09 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static int	test(int i, int m, int c1, int c2)
+static int	ft_gradient(int i, int m, int c1, int c2)
 {
 	unsigned char	a[3];
 	unsigned char	b[3];
@@ -38,12 +38,12 @@ void		ft_color(t_win w, int *p, int *i)
 	if (i[0] == i[1])
 		color = 0;
 	else if (i[0] % 100 > 75)
-		color = test(i[0] % 100 - 75, 25, w.col[0], w.col[1]);
+		color = ft_gradient(i[0] % 100 - 75, 25, w.col[1], w.col[2]);
 	else if (i[0] % 100 > 50)
-		color = test(i[0] % 100 - 50, 25, w.col[1], w.col[2]);
+		color = ft_gradient(i[0] % 100 - 50, 25, w.col[2], w.col[3]);
 	else if (i[0] % 100 > 25)
-		color = test(i[0] % 100 - 25, 25, w.col[2], w.col[3]);
+		color = ft_gradient(i[0] % 100 - 25, 25, w.col[3], w.col[4]);
 	else
-		color = test(i[0] % 100, 25, w.col[3], w.col[0]);
+		color = ft_gradient(i[0] % 100, 25, w.col[4], w.col[1]);
 	ft_memcpy(w.str + p[1] * w.lsz + p[0] * w.bpp / 8, (char*)&color, 3);
 }

@@ -6,7 +6,7 @@
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 14:24:55 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/18 21:01:16 by pguillie         ###   ########.fr       */
+/*   Updated: 2017/12/18 22:13:28 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,22 @@
 # define BUTTONPRESS 4
 # define BUTTONRELEASE 5
 # define MOTIONNOTIFY 6
+# define DESTROYNOTIFY 17
 
 # include "mlx.h"
 # include "struct.h"
 # include "define.h"
 
+/*
+**	MAIN
+*/
+
 int		ft_init(int ac, char **av, t_mlx *m);
 int		ft_win_set(t_mlx *m);
+
+/*
+**	FRACTALS
+*/
 
 void	ft_fractal(t_win w);
 int		ft_sequence1(double *c, double *z, int i);
@@ -66,15 +75,24 @@ void	ft_reset_m3(t_win *w);
 void	ft_reset_m4(t_win *w);
 void	ft_reset_j(t_win *w);
 
+/*
+**	EVENTS
+*/
+
 int		ft_key_press(int key, t_win *w);
 int		ft_key_release(int key, t_win *w);
 int		ft_button_press(int button, int x, int y, t_win *w);
 int		ft_pointer_motion(int x, int y, t_win *w);
 
+/*
+**	COLORS
+*/
+
 void	ft_color(t_win w, int *p, int *i);
+void	ft_color_set(t_win *w);
 
 /*
-**	LIBFT
+**	LIB
 */
 
 int		ft_strcmp(const char *s1, const char *s2);
@@ -83,7 +101,5 @@ void	*ft_memset(void *p, int c, size_t len);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 char	*ft_strcat(char *dest, const char *src);
 char	*ft_strcpy(char *dest, const char *src);
-
-#include <stdio.h>
 
 #endif

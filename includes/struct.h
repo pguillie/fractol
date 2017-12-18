@@ -6,7 +6,7 @@
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 14:11:41 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/18 19:34:26 by pguillie         ###   ########.fr       */
+/*   Updated: 2017/12/18 21:26:59 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct	s_thread
 	t_win		w;
 	int			beg;
 	int			end;
-}		t_thread;
+}				t_thread;
 
 typedef struct	s_mlx
 {

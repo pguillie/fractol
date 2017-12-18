@@ -6,11 +6,21 @@
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 11:00:12 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/18 19:23:54 by pguillie         ###   ########.fr       */
+/*   Updated: 2017/12/18 21:33:31 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+static int	ft_key_close(t_win *w, t_mlx *m)
+{
+	mlx_destroy_image(m->mlx, w->img);
+	mlx_destroy_window(m->mlx, w->ptr);
+	w->ptr = NULL;
+	if (!(m->win[0].ptr || m->win[1].ptr || m->win[2].ptr))
+		exit(EXIT_SUCCESS);
+	return (0);
+}
 
 static int	ft_key_mv(int key, t_win *w, t_mlx *m)
 {
@@ -30,21 +40,14 @@ static int	ft_key_mv(int key, t_win *w, t_mlx *m)
 int			ft_key_press(int key, t_win *w)
 {
 	t_mlx	*m;
-	
+
 	m = (t_mlx*)(w->mlx);
 	if (key == KEY_ESC)
-	{
-		mlx_destroy_image(m->mlx, w->img);
-		mlx_destroy_window(m->mlx, w->ptr);
-		w->ptr = NULL;
-		if (m->win[0].ptr || m->win[1].ptr || m->win[2].ptr)
-			return (0);
-		exit(EXIT_SUCCESS);
-	}
+		return (ft_key_close(w, m));
 	if (key == KEY_SPC)
 	{
-	    w->set[1] = (w->set[1] + 1) % 2;
-	    return (0);
+		w->set[1] = (w->set[1] + 1) % 2;
+		return (0);
 	}
 	if (key == KEY_RAZ)
 		w->reset(w);
