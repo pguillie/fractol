@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pointer_motion.c                                :+:      :+:    :+:   */
+/*   ft_destroy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/15 17:14:47 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/18 23:08:16 by pguillie         ###   ########.fr       */
+/*   Created: 2017/12/18 22:26:19 by pguillie          #+#    #+#             */
+/*   Updated: 2017/12/18 22:31:42 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		ft_pointer_motion(int x, int y, t_win *w)
+int		ft_close(t_win *w, t_mlx *m)
 {
-	t_mlx	*m;
-
-	if (w->set[1] == 0)
-		return (0);
-	m = (t_mlx*)w->mlx;
-	w->cur[0] = x / (w->wdt / 2.0) - 1;
-	w->cur[1] = y / (w->hgt / 2.0) - 1;
-	ft_fractal(*w);
-	mlx_put_image_to_window(m->mlx, w->ptr, w->img, 0, 0);
+	mlx_destroy_image(m->mlx, w->img);
+	mlx_destroy_window(m->mlx, w->ptr);
+	w->ptr = NULL;
+	if (!(m->win[0].ptr || m->win[1].ptr || m->win[2].ptr))
+		exit(EXIT_SUCCESS);
 	return (0);
+}
+
+int		ft_event_close(t_win *w)
+{
+	return (ft_close(w, (t_mlx*)w->mlx));
 }

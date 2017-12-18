@@ -6,21 +6,11 @@
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 11:00:12 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/18 21:33:31 by pguillie         ###   ########.fr       */
+/*   Updated: 2017/12/18 22:32:27 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-static int	ft_key_close(t_win *w, t_mlx *m)
-{
-	mlx_destroy_image(m->mlx, w->img);
-	mlx_destroy_window(m->mlx, w->ptr);
-	w->ptr = NULL;
-	if (!(m->win[0].ptr || m->win[1].ptr || m->win[2].ptr))
-		exit(EXIT_SUCCESS);
-	return (0);
-}
 
 static int	ft_key_mv(int key, t_win *w, t_mlx *m)
 {
@@ -43,18 +33,17 @@ int			ft_key_press(int key, t_win *w)
 
 	m = (t_mlx*)(w->mlx);
 	if (key == KEY_ESC)
-		return (ft_key_close(w, m));
+		return (ft_close(w, m));
 	if (key == KEY_SPC)
-	{
 		w->set[1] = (w->set[1] + 1) % 2;
-		return (0);
-	}
 	if (key == KEY_RAZ)
 		w->reset(w);
 	else if (key == KEY_PLUS)
 		w->i += 10;
 	else if (key == KEY_MINUS && w->i > 10)
 		w->i -= 10;
+	else if (key == KEY_COL)
+		ft_color_set(w);
 	else if (key == KEY_UP || key == KEY_DO || key == KEY_RI || key == KEY_LE)
 		return (ft_key_mv(key, w, m));
 	else

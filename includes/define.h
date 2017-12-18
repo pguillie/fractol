@@ -6,7 +6,7 @@
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 09:43:57 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/18 21:24:02 by pguillie         ###   ########.fr       */
+/*   Updated: 2017/12/18 22:25:17 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 #  define KEY_LE 65361
 #  define KEY_PLUS 65451
 #  define KEY_MINUS 65453
+#  define KEY_COL 8
 # endif
 
 # ifdef __APPLE__
@@ -45,6 +46,7 @@
 #  define KEY_LE 123
 #  define KEY_PLUS 69
 #  define KEY_MINUS 78
+#  define KEY_COL 8
 # endif
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 14:24:55 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/18 22:13:28 by pguillie         ###   ########.fr       */
+/*   Updated: 2017/12/18 22:33:08 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,9 @@ int		ft_key_press(int key, t_win *w);
 int		ft_key_release(int key, t_win *w);
 int		ft_button_press(int button, int x, int y, t_win *w);
 int		ft_pointer_motion(int x, int y, t_win *w);
+int		ft_event_close(t_win *w);
+
+int		ft_close(t_win *w, t_mlx *m);
 
 /*
 **	COLORS

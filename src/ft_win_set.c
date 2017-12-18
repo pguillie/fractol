@@ -6,7 +6,7 @@
 /*   By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 13:14:55 by pguillie          #+#    #+#             */
-/*   Updated: 2017/12/18 22:12:25 by pguillie         ###   ########.fr       */
+/*   Updated: 2017/12/18 23:04:17 by pguillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,26 @@ static char	*ft_win_set_m(t_win *w)
 static char	*ft_win_set_j(t_win *w)
 {
 	w->reset = ft_reset_j;
-	w->cur[0] = 0.5;
-	w->cur[1] = 0.5;
+	w->cur[0] = -0.048;
+	w->cur[1] = -0.494;
 	if (w->sequence == ft_sequence1)
+	{
+		w->cur[0] = 0.366;
+		w->cur[1] = 0.128;
 		return ("Julia");
+	}
 	if (w->sequence == ft_sequence2)
+	{
+		w->cur[0] = 0.294;
+		w->cur[1] = 0.014;
 		return ("Julia(2)");
+	}
 	if (w->sequence == ft_sequence3)
+	{
+		w->cur[0] = 0.548;
+		w->cur[1] = 0.238;
 		return ("Julia(3)");
+	}
 	if (w->sequence == ft_sequence4)
 		return ("Julia(4)");
 	return (NULL);
@@ -69,6 +81,7 @@ static void	ft_win_set_hook(t_win *w)
 	mlx_hook(w->ptr, KEYRELEASE, KEYRELEASEMASK, ft_key_release, w);
 	mlx_hook(w->ptr, BUTTONPRESS, BUTTONPRESSMASK, ft_button_press, w);
 	mlx_hook(w->ptr, MOTIONNOTIFY, POINTERMOTIONMASK, ft_pointer_motion, w);
+	mlx_hook(w->ptr, DESTROYNOTIFY, KEYRELEASEMASK, ft_event_close, w);
 }
 
 int			ft_win_set(t_mlx *m)
