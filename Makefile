@@ -6,7 +6,7 @@
 #    By: pguillie <pguillie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/12 11:31:17 by pguillie          #+#    #+#              #
-#    Updated: 2017/12/18 09:44:53 by pguillie         ###   ########.fr        #
+#    Updated: 2017/12/19 10:17:58 by pguillie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	= fractol
 CC		= gcc
 FLAGS	= -Wall -Werror -Wextra
 INCPATH	= includes/
-HEADERS	= $(addprefix $(INCPATH), fractol.h)
+HEADERS	= $(addprefix $(INCPATH), fractol.h define.h struct.h)
 MLX		= -lm -L/usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
 THREAD	= -lpthread
 
